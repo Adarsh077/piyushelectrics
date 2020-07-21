@@ -1,0 +1,37 @@
+/* ClientsTable.js */
+.table thead th {
+  position: relative;
+  border: 0px !important;
+}
+
+.badge {
+  cursor: pointer;
+}
+
+.search {
+  max-width: 30%;
+}
+
+.search-badge {
+  height: calc(1.5em + 0.75rem + 2px);
+  display: flex;
+  align-items: center;
+}
+
+.search-badge:hover {
+  background-color: #f04124;
+  color: #fff;
+}
+
+.clients table tr th:nth-child(2),
+.clients table tr td:nth-child(2) {
+  text-align: left;
+}
+
+.clients table tr td {
+  cursor: pointer;
+}
+
+.clients .sticky-top {
+  top: 6.4rem;
+}

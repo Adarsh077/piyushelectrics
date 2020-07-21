@@ -1,0 +1,19 @@
+table tr {
+  text-align: center;
+}
+table td {
+  vertical-align: middle !important;
+}
+
+.work table tr td:first-child,
+.work table tr th:first-child {
+  text-align: left;
+}
+
+tr td.delete button {
+  opacity: 0;
+}
+
+tr:hover td.delete button {
+  opacity: 1;
+}

@@ -1,0 +1,52 @@
+*::selection {
+  background-color: #008bbaa4 !important;
+  color: #fff !important;
+}
+
+body {
+  margin: 0;
+  font-family: "Ubuntu";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+.form-control:focus,
+.btn:focus,
+.btn:active {
+  box-shadow: none !important;
+}
+
+.a,
+.a:hover,
+.a:focus,
+.a:active,
+.a:visited {
+  text-decoration: none;
+  color: inherit !important;
+}
+
+/* Remove the arrows from input[type="number"] */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
