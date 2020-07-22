@@ -1,4 +1,4 @@
-export default (data, exceptions = {}) => {
+export default (data, existingClients, exceptions = {}) => {
   const errors = {};
   if (!data.name) errors.name = "Name is required";
   if (!data.room) errors.room = "Room is required";
@@ -10,6 +10,13 @@ export default (data, exceptions = {}) => {
   if (!data.building) errors.building = "Building is required";
   if (data.mobile && data.mobile.toString().length !== 10)
     errors.mobile = "Please enter a valid mobile number";
+
+  if (data.mobile) {
+    const doesExisits = existingClients.find(
+      (client) => parseInt(client.mobile) === parseInt(data.mobile)
+    );
+    if (doesExisits) errors.mobile = "Mobile Number is already in use";
+  }
 
   /**
    * Boolean({})

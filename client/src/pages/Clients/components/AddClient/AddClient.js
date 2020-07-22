@@ -34,7 +34,7 @@ export default class AddCient extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const errors = validateAddClient(this.state);
+    const errors = validateAddClient(this.state, this.context.clients);
     if (errors) {
       return this.setState({ errors });
     }

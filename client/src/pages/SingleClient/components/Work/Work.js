@@ -5,19 +5,22 @@ import { withRouter } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 
 import AddWork from "../AddWork/AddWork";
-import "./Work.css";
 
 import { ClientContext } from "../../../../context/ClientContext";
 import Axios from "../../../../services/Axios";
+
+import "./Work.css";
 
 const Work = (props) => {
   const context = useContext(ClientContext);
   const [currentClient, setCurrentClient] = useState({ work: [] });
 
   useEffect(() => {
-    if (context.clients.length === 0) return;
-    const id = props.match.params.id;
-    const client = context.clients.find((client) => client._id === id);
+    const { clients } = context;
+    if (clients.length === 0) return;
+    const client = clients.find(
+      (client) => client._id === props.match.params.id
+    );
     if (!client) props.history.push("/");
     setCurrentClient({ ...client, ...client.address });
   }, [context.clients]);

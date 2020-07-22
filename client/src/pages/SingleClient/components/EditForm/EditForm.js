@@ -2,23 +2,26 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Col, Card, Form, Button } from "react-bootstrap";
-
 import { Input } from "../../../../components";
+
 import validateAddClient from "../../../../utils/validation/validateAddClient";
 import convertToYY_MM_DD from "../../../../utils/convertToYY_MM_DD";
+
 import { ClientContext } from "../../../../context/ClientContext";
 import Axios from "../../../../services/Axios";
 
 const EditForm = (props) => {
   const context = useContext(ClientContext);
-  const [currentClient, setCurrentClient] = useState({});
   const [errors, setErrors] = useState({});
+  const [currentClient, setCurrentClient] = useState({});
   const [disableButton, setDisableButton] = useState(false);
 
   useEffect(() => {
-    if (context.clients.length === 0) return;
-    const id = props.match.params.id;
-    const client = context.clients.find((client) => client._id === id);
+    const { clients } = context;
+    if (clients.length === 0) return;
+    const client = clients.find(
+      (client) => client._id === props.match.params.id
+    );
     if (!client) props.history.push("/");
     setCurrentClient({ ...client, ...client.address });
   }, [context.clients]);

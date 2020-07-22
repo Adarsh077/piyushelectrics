@@ -50,3 +50,7 @@ input[type="number"] {
   -ms-overflow-style: none;
   scrollbar-width: none; /* Firefox */
 }
+
+.is-invalid {
+  color: #dc3545;
+}

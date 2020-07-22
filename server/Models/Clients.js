@@ -22,6 +22,7 @@ const ClientsSchema = new Schema({
   mobile: {
     type: Number,
     maxlength: 10,
+    unique: true,
     required: true,
   },
 

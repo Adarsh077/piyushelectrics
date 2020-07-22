@@ -6,11 +6,19 @@ const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
+const developmentDB = "mongodb://localhost:27017/piyushelectrics";
+const productionDB =
+  "mongodb+srv://admin:kamlesh@07@piyushdb.hrf7c.gcp.mongodb.net/piyushelectrics?retryWrites=true&w=majority";
+
+const MongoDBConnectionString =
+  process.env.NODE_ENV === "production" ? productionDB : developmentDB;
+
 mongoose
-  .connect("mongodb+srv://admin:kamlesh@07@piyushdb.hrf7c.gcp.mongodb.net/piyushelectrics?retryWrites=true&w=majority", {
+  .connect(MongoDBConnectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true,
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
