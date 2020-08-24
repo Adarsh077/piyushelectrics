@@ -1,6 +1,28 @@
 const router = require("express").Router(),
-  clients = require("../Models/Clients"),
+  clients = require("../Models/Client"),
+  LogDoc = require("../Models/Log"),
   ObjectId = require("mongoose").Types.ObjectId;
+
+router.use("/work", require("./works"));
+
+const UpdateClientMiddleware = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    if (!id) next(new Error("id as paramter is required"));
+
+    await LogDoc.create({
+      action: "UPDATE",
+      entity: "CLIENT",
+      clientid: id,
+      message: `${name || "Client"} updated`,
+    });
+    next();
+  } catch (e) {
+    next(e);
+  }
+};
 
 router.get("/:id", (req, res, next) => {
   clients
@@ -23,11 +45,11 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", UpdateClientMiddleware, (req, res, next) => {
   const { id } = req.params;
 
   clients
-    .findByIdAndUpdate(id, req.body, { new: true })
+    .findOneAndUpdate({ _id: id }, req.body, { new: true })
     .then((client) => res.send(client))
     .catch(next);
 });
@@ -43,7 +65,7 @@ router.delete("/", (req, res, next) => {
 
 router.delete("/:id", (req, res, next) => {
   clients
-    .findByIdAndDelete(req.params.id)
+    .findOneAndDelete({ _id: req.params.id })
     .then((client) => res.send(client))
     .catch(next);
 });

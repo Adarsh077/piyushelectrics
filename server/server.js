@@ -32,12 +32,13 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 app.use("/client", require("./Routes/clients"));
+app.use("/logs", require("./Routes/logs"));
 
 app.post("/authenticate", (req, res) =>
   res.send(req.body.password === "kamlesh@07")
 );
 
-app.use((err, req, res, next) => console.log(err) || res.send(err));
+app.use((err, req, res, next) => console.log(err) || res.status(400).send(err));
 
 const port = process.env.PORT || 8000;
 app.listen(port, (err) => console.log(err ? err : `Running on ${port}...`));
